@@ -23,9 +23,9 @@ app.post('/payment', async (req, res) => {
 
 app.post('/telegram', async (req, res) => {
     if (req.body.message.text.includes("/pay")) {
-            const payment = await createYookassaPayment(req.body.message.text.split(' ')[1], req.body.message.chat.id, req.body.message.message_id)
-            await sendPaymentLink(payment.confirmation.confirmation_url, req.body.message.chat.id)
-            res.sendStatus(200)
+        const payment = await createYookassaPayment(req.body.message.text.split(' ')[1], req.body.message.chat.id, req.body.message.message_id)
+        await sendPaymentLink(payment.confirmation.confirmation_url, req.body.message.chat.id, payment.amount.value)
+        res.sendStatus(200)
     } else {
         res.sendStatus(400)
     }

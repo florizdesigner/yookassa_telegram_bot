@@ -103,10 +103,10 @@ const telegramSendInvoiceLink = async (amount, chat_id) => {
     }
 }
 
-const sendPaymentLink = async (url, user_id) => {
+const sendPaymentLink = async (url, user_id, sum) => {
     let data = JSON.stringify({
         "chat_id": user_id,
-        "text": "К оплате: 100 рублей, для оплаты нажмите кнопку \"Оплатить\"!",
+        "text": `К оплате: ${sum} рублей, для оплаты нажмите кнопку "Оплатить"!`,
         "reply_markup": {
             "inline_keyboard": [
                 [
