@@ -17,10 +17,10 @@
     "morgan": "~1.9.1",
     "node-telegram-bot-api": "^0.64.0",
     "qs": "^6.11.2",
+    "telegraf": "^3.38.0",
     "uuid": "^9.0.1"
   },
   "main": "TelegramBotHelperCopy.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC",

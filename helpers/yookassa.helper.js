@@ -1,7 +1,7 @@
 const {v4} = require('uuid')
 const axios = require('axios')
 
-const createYookassaPayment = (sum, user_id) => {
+const createYookassaPayment = (sum, user_id, message_id) => {
     const options = {
         method: 'POST',
         url: 'https://api.yookassa.ru/v3/payments',
@@ -12,15 +12,15 @@ const createYookassaPayment = (sum, user_id) => {
         },
         data: {
             amount: {value: sum, currency: 'RUB'},
-            recipient: {gateway_id: '2032883'},
-            confirmation: {type: 'redirect', return_url: 'https://t.me/ben_benis_bot'},
-            metadata: {channel: 'telegram', user_id},
+            recipient: {gateway_id: process.env.YOOKASSA_GATEWAY_ID || null},
+            confirmation: {type: 'redirect', return_url: process.env.TELEGRAM_BOT_LINK},
+            metadata: {channel: 'telegram', user_id, message_id},
             capture: true,
             description: `Order for user_id: ${user_id}`
         }
     };
 
-    return axios.request(options).then(function (response) {
+    axios.request(options).then(function (response) {
         return response.data
     }).catch(function (error) {
         return error
